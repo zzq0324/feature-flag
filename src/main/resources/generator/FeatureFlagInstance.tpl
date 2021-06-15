@@ -41,38 +41,6 @@ public class $className extends FeatureFlagInstance {
     private Set<String> whiteSet;
     private Set<String> blackSet;
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-        // 转换成Date
-        startDate = parseTime(startTime);
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-        // 转换成Date
-        endDate = parseTime(endTime);
-    }
-
-    public void setWhiteList(String whiteList) {
-        this.whiteList = whiteList;
-
-        this.whiteSet = StringUtils.commaDelimitedListToSet(whiteList);
-    }
-
-    public void setBlackList(String blackList) {
-        this.blackList = blackList;
-        // 设置成set，避免每次临时转换
-        this.blackSet = StringUtils.commaDelimitedListToSet(whiteList);
-    }
-
-    public void setLaunchPercent(int launchPercent) {
-        this.launchPercent = launchPercent;
-    }
-
     @Override
     protected String getDesc() {
         return desc;
@@ -80,11 +48,19 @@ public class $className extends FeatureFlagInstance {
 
     @Override
     protected Set<String> getWhiteSet() {
+        if (whiteSet == null) {
+            whiteSet = StringUtils.commaDelimitedListToSet(whiteList);
+        }
+
         return whiteSet;
     }
 
     @Override
     protected Set<String> getBlackSet() {
+        if (blackSet == null) {
+            blackSet = StringUtils.commaDelimitedListToSet(blackList);
+        }
+
         return blackSet;
     }
 
@@ -95,11 +71,19 @@ public class $className extends FeatureFlagInstance {
 
     @Override
     public Date getStartDate() {
+        if (!StringUtils.isEmpty(startTime) && startDate == null) {
+            startDate = parseTime(startTime);
+        }
+
         return startDate;
     }
 
     @Override
     public Date getEndDate() {
+        if (!StringUtils.isEmpty(endTime) && endDate == null) {
+            endDate = parseTime(endTime);
+        }
+
         return endDate;
     }
 }

@@ -5,7 +5,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 配置文件加载 -->
-    <context:property-placeholder location="classpath:application.properties"/>
+    <context:property-placeholder location="classpath:application.properties" file-encoding="UTF-8"/>
     <!-- 扫描包路径 -->
     <context:component-scan base-package="cn.zzq0324"/>
 </beans>
