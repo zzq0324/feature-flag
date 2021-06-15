@@ -1,0 +1,7 @@
+!.idea/saveactions_settings.xml
+*.iml
+*.log
+.idea/
+logs/
+target/
+apollo/
