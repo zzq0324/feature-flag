@@ -16,28 +16,12 @@ public class $className extends FeatureFlagInstance {
     @Value("${flags.$flagName.desc}")
     private String desc;
 
-    // 开始时间
-    @Value("${flags.$flagName.startTime}")
-    private String startTime;
-
-    // 结束时间
-    @Value("${flags.$flagName.endTime}")
-    private String endTime;
-
-    // 白名单，多个以逗号隔开
-    @Value("${flags.$flagName.whiteList}")
-    private String whiteList;
-
-    // 黑名单，多个以逗号隔开
-    @Value("${flags.$flagName.blackList}")
-    private String blackList;
-
     // 灰度比例
     @Value("${flags.$flagName.launchPercent}")
     private int launchPercent;
 
-    private Date startDate;
-    private Date endDate;
+    private long startTime;
+    private long endTime;
     private Set<String> whiteSet;
     private Set<String> blackSet;
 
@@ -48,20 +32,24 @@ public class $className extends FeatureFlagInstance {
 
     @Override
     protected Set<String> getWhiteSet() {
-        if (whiteSet == null) {
-            whiteSet = StringUtils.commaDelimitedListToSet(whiteList);
-        }
-
         return whiteSet;
+    }
+
+    // 允许名单，多个以逗号隔开
+    @Value("${flags.$flagName.whiteList}")
+    public void setAllowSet(String value) {
+        whiteSet = StringUtils.commaDelimitedListToSet(value);
     }
 
     @Override
     protected Set<String> getBlackSet() {
-        if (blackSet == null) {
-            blackSet = StringUtils.commaDelimitedListToSet(blackList);
-        }
-
         return blackSet;
+    }
+
+    // 阻止名单，多个以逗号隔开
+    @Value("${flags.$flagName.blackList}")
+    public void setBlockSet(String value) {
+        blackSet = StringUtils.commaDelimitedListToSet(value);
     }
 
     @Override
@@ -70,20 +58,32 @@ public class $className extends FeatureFlagInstance {
     }
 
     @Override
-    public Date getStartDate() {
-        if (!StringUtils.isEmpty(startTime) && startDate == null) {
-            startDate = parseTime(startTime);
-        }
+    public long getStartTime() {
+        return startTime;
+    }
 
-        return startDate;
+    // 开始时间
+    @Value("${flags.$flagName.startTime}")
+    public void setStartTime(String value) {
+        if (!StringUtils.isEmpty(value)) {
+            startTime = parseTime(value).getTime();
+        } else {
+            startTime = 0;
+        }
     }
 
     @Override
-    public Date getEndDate() {
-        if (!StringUtils.isEmpty(endTime) && endDate == null) {
-            endDate = parseTime(endTime);
-        }
+    public long getEndTime() {
+        return endTime;
+    }
 
-        return endDate;
+    // 结束时间
+    @Value("${flags.$flagName.endTime}")
+    public void setEndTime(String value) {
+        if (!StringUtils.isEmpty(value)) {
+            endTime = parseTime(value).getTime();
+        } else {
+            endTime = Long.MAX_VALUE;
+        }
     }
 }

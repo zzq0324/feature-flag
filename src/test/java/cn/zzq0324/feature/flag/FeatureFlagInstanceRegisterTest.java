@@ -49,8 +49,8 @@ public class FeatureFlagInstanceRegisterTest {
 
         Assert.assertEquals("enable-open-search", featureFlagInstance.getFlagName());
 
-        Assert.assertNotNull(featureFlagInstance.getStartDate());
-        Assert.assertNull(featureFlagInstance.getEndDate());
+        Assert.assertNotNull(featureFlagInstance.getEndTime() != 0);
+        Assert.assertTrue(featureFlagInstance.getEndTime() == Long.MAX_VALUE);
 
         Assert.assertEquals(95, featureFlagInstance.getLaunchPercent());
 

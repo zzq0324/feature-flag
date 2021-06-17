@@ -3,7 +3,6 @@ package cn.zzq0324.feature.flag.mock;
 import cn.zzq0324.feature.flag.FeatureFlagInstance;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,12 +45,12 @@ public class CustomFeatureFlagInstance extends FeatureFlagInstance {
     }
 
     @Override
-    public Date getStartDate() {
-        return null;
+    public long getStartTime() {
+        return 0;
     }
 
     @Override
-    public Date getEndDate() {
-        return null;
+    public long getEndTime() {
+        return Long.MAX_VALUE;
     }
 }

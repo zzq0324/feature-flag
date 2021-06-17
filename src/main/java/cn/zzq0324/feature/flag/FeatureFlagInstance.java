@@ -72,14 +72,14 @@ public abstract class FeatureFlagInstance {
      *
      * @return
      */
-    public abstract Date getStartDate();
+    public abstract long getStartTime();
 
     /**
      * 获取灰度结束时间
      *
      * @return
      */
-    public abstract Date getEndDate();
+    public abstract long getEndTime();
 
     /**
      * 判断业务id是否在灰度范围内，通过bizId计算hash值
@@ -151,11 +151,9 @@ public abstract class FeatureFlagInstance {
      * @return 返回是否在时间段内
      */
     protected boolean isInTimeSection() {
-        long start = getStartDate() == null ? 0 : getStartDate().getTime();
-        long end = getEndDate() == null ? Long.MAX_VALUE : getEndDate().getTime();
         Date now = new Date();
 
-        return now.getTime() >= start && now.getTime() <= end;
+        return now.getTime() >= getStartTime() && now.getTime() <= getEndTime();
     }
 
     protected boolean isContain(Collection<String> list, String bizId) {
