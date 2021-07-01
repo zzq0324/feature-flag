@@ -1,8 +1,12 @@
 package cn.zzq0324.feature.flag.support;
 
-import com.itranswarp.compiler.JavaStringCompiler;
+import com.taobao.arthas.compiler.DynamicCompiler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -12,6 +16,8 @@ import java.util.Map;
  * version: 1.0 <br>
  */
 public class JdkCompiler {
+
+    private static final Logger logger = LoggerFactory.getLogger(JdkCompiler.class);
 
     public static final String JAVA_FILE_SUFFIX = ".java";
 
@@ -25,11 +31,22 @@ public class JdkCompiler {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static <T> Class<? extends T> compile(String classPackage, String classSimpleName, String source)
-        throws IOException, ClassNotFoundException {
-        JavaStringCompiler compiler = new JavaStringCompiler();
-        Map<String, byte[]> compileResult = compiler.compile(classSimpleName + JAVA_FILE_SUFFIX, source);
+    public static <T> Class<? extends T> compile(String classPackage, String classSimpleName, String source) {
+        DynamicCompiler dynamicCompiler = new DynamicCompiler(Thread.currentThread().getContextClassLoader());
 
-        return (Class<T>)compiler.loadClass(classPackage + "." + classSimpleName, compileResult);
+        String className = classPackage + "." + classSimpleName;
+        dynamicCompiler.addSource(className, source);
+
+        Map<String, Class<?>> classMap = dynamicCompiler.build();
+
+        // 成功编译，未报错
+        if (CollectionUtils.isEmpty(dynamicCompiler.getErrors())) {
+            return (Class<? extends T>)classMap.get(className);
+        }
+
+        logger.error("Compile class: {} error, error info: {}", className,
+            Arrays.toString(dynamicCompiler.getErrors().toArray()));
+
+        throw new IllegalStateException("Compile error");
     }
 }
