@@ -82,6 +82,13 @@ public abstract class FeatureFlagInstance {
     public abstract long getEndTime();
 
     /**
+     * 获取扩展信息
+     *
+     * @return
+     */
+    public abstract String getExtra();
+
+    /**
      * 判断业务id是否在灰度范围内，通过bizId计算hash值
      *
      * @param bizId 业务id，根据业务的具体场景设置，例如可以是用户id、员工id、城市等

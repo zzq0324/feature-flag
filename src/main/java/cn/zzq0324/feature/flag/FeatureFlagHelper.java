@@ -28,8 +28,7 @@ public class FeatureFlagHelper {
      */
     public static boolean isFeatureOn(String flagName, String bizId) {
         try {
-            FeatureFlagInstance instance =
-                FLAG_MAP.computeIfAbsent(flagName, k -> FeatureFlagInstanceRegister.registerIfNotExist(k));
+            FeatureFlagInstance instance = getFeatureFlagInstance(flagName);
 
             return instance.isFeatureOn(bizId);
         } catch (Exception e) {
@@ -38,6 +37,16 @@ public class FeatureFlagHelper {
 
         // 执行错误降级，不灰度
         return false;
+    }
+
+    /**
+     * 获取feature flag实例
+     *
+     * @param flagName 特性开关名称
+     * @return 返回特性开关实例
+     */
+    public static FeatureFlagInstance getFeatureFlagInstance(String flagName) {
+        return FLAG_MAP.computeIfAbsent(flagName, k -> FeatureFlagInstanceRegister.registerIfNotExist(k));
     }
 
     /**

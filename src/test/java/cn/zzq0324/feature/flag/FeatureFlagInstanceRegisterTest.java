@@ -60,6 +60,8 @@ public class FeatureFlagInstanceRegisterTest {
         Assert.assertFalse(featureFlagInstance.getWhiteSet().contains("u4"));
 
         Assert.assertTrue(featureFlagInstance.getBlackSet().size() == 0);
+
+        Assert.assertEquals("extraInfo", featureFlagInstance.getExtra());
     }
 
     /**

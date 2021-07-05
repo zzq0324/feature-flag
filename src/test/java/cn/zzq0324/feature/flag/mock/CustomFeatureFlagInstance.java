@@ -53,4 +53,9 @@ public class CustomFeatureFlagInstance extends FeatureFlagInstance {
     public long getEndTime() {
         return Long.MAX_VALUE;
     }
+
+    @Override
+    public String getExtra() {
+        return "getExtra";
+    }
 }

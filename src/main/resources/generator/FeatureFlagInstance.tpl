@@ -20,6 +20,10 @@ public class $className extends FeatureFlagInstance {
     @Value("${flags.$flagName.launchPercent}")
     private int launchPercent;
 
+    // flag扩展信息
+    @Value("${flags.$flagName.extra}")
+    private String extra;
+
     private long startTime;
     private long endTime;
     private Set<String> whiteSet;
@@ -75,6 +79,11 @@ public class $className extends FeatureFlagInstance {
     @Override
     public long getEndTime() {
         return endTime;
+    }
+
+    @Override
+    public String getExtra() {
+        return extra;
     }
 
     // 结束时间
