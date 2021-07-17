@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -27,9 +26,8 @@ public class JdkCompiler {
      * @param classPackage    类的包路径
      * @param classSimpleName 类名
      * @param source          代码
+     * @param <T>             泛型，FeatureFlagInstance的子类
      * @return 返回编译后的Class
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
     public static <T> Class<? extends T> compile(String classPackage, String classSimpleName, String source) {
         DynamicCompiler dynamicCompiler = new DynamicCompiler(Thread.currentThread().getContextClassLoader());

@@ -32,6 +32,7 @@ public class FeatureFlagInstanceRegister {
      * 如果flag对应的bean不存在，则生成
      *
      * @param flagName flag名称
+     * @return 返回开关实例对象
      */
     public static FeatureFlagInstance registerIfNotExist(String flagName) {
         if (!isContainsBean(flagName)) {
@@ -113,7 +114,7 @@ public class FeatureFlagInstanceRegister {
      * 将特性开关名称转为类名，将横杠转为下划线
      *
      * @param flagName 开关名称
-     * @return
+     * @return 返回类名
      */
     protected static String flagNameToClassName(String flagName) {
         flagName = flagName.replaceAll("-", "_");

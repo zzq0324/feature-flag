@@ -33,7 +33,7 @@ public abstract class FeatureFlagInstance {
     /**
      * 获取feature flag名称
      *
-     * @return
+     * @return 返回特性开关名称
      */
     public String getFlagName() {
         return this.flagName;
@@ -42,49 +42,49 @@ public abstract class FeatureFlagInstance {
     /**
      * 获取feature flag描述
      *
-     * @return
+     * @return 返回开关描述
      */
     protected abstract String getDesc();
 
     /**
      * 白名单列表
      *
-     * @return
+     * @return 返回白名单集合
      */
     protected abstract Set<String> getWhiteSet();
 
     /**
      * 黑名单列表
      *
-     * @return
+     * @return 返回黑名单集合
      */
     protected abstract Set<String> getBlackSet();
 
     /**
      * 灰度比例
      *
-     * @return
+     * @return 返回灰度比例，判断是否命中
      */
     public abstract int getLaunchPercent();
 
     /**
      * 获取灰度开始时间
      *
-     * @return
+     * @return 返回开始时间戳
      */
     public abstract long getStartTime();
 
     /**
      * 获取灰度结束时间
      *
-     * @return
+     * @return 返回结束时间错，如果未设置责任Long.MAX_VALUE
      */
     public abstract long getEndTime();
 
     /**
      * 获取扩展信息
      *
-     * @return
+     * @return 返回扩展信息
      */
     public abstract String getExtra();
 
