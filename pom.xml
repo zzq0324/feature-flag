@@ -7,6 +7,9 @@
     <artifactId>feature-flag</artifactId>
     <packaging>jar</packaging>
     <version>1.0.1</version>
+    <name>Feature Flag</name>
+    <description>A feature flag tool to control new feature's open status.</description>
+    <url>https://github.com/zzq0324/feature-flag</url>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -42,12 +45,12 @@
         <snapshotRepository>
             <!--id 要与setting.xml server id一致 -->
             <id>sonatype-snapshot</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <!--id 要与setting.xml server id一致 -->
             <id>sonatype-release</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
 
