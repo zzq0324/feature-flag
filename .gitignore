@@ -5,3 +5,6 @@
 logs/
 target/
 apollo/
+.classpath
+.project
+.settings
