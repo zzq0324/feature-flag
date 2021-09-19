@@ -2,7 +2,6 @@ package cn.zzq0324.feature.flag;
 
 import cn.zzq0324.feature.flag.spring.SpringContextHolder;
 import cn.zzq0324.feature.flag.support.JdkCompiler;
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -44,8 +43,6 @@ public class FeatureFlagInstanceRegister {
         }
 
         FeatureFlagInstance instance = getInstanceFromSpringContext(flagName);
-
-        Preconditions.checkNotNull(instance);
 
         return instance;
     }
