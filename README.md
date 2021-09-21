@@ -55,7 +55,7 @@ flags.enable-open-search.launchPercent=95
 <dependency>
     <groupId>cn.zzq0324</groupId>
     <artifactId>feature-flag</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
